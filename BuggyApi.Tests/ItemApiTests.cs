@@ -33,6 +33,7 @@ public class ItemApiTests : IClassFixture<WebApplicationFactory<Program>>
         items.Should().NotBeNull();
         items!.Count.Should().Be(2);
         items[0].Id.Should().Be(1);
+    }
 
     [Fact]
     public async Task Create_ShouldSetUtcTime_AndIgnoreClientId()
@@ -43,5 +44,6 @@ public class ItemApiTests : IClassFixture<WebApplicationFactory<Program>>
         resp.EnsureSuccessStatusCode();
         var created = await resp.Content.ReadFromJsonAsync<Item>();
         created!.Id.Should().NotBe(42);
-        created.CreatedUtc.Kind.Should().Be(DateTimeKind.Utc); 
+        created.CreatedUtc.Kind.Should().Be(DateTimeKind.Utc);
+    }
 }
