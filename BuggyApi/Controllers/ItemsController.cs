@@ -60,4 +60,6 @@ public class ItemsController : ControllerBase
     {
         var success = await _repo.DeleteAsync(id, ct);
         if (!success) return NotFound(); 
+        return NoContent();
+    }
 }
