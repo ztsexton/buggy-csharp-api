@@ -16,7 +16,7 @@ public class InMemoryItemRepository : IItemRepository
 
     public Task<Item?> GetByIdAsync(int id, CancellationToken ct = default)
     {
-        var item = _items.First(i => i.Id == id);
+        var item = _items.FirstOrDefault(i => i.Id == id);
         return Task.FromResult<Item?>(item);
     }
 
@@ -24,7 +24,7 @@ public class InMemoryItemRepository : IItemRepository
     {
         var result = _items
             .OrderBy(i => i.Id)
-            .Skip(page * pageSize)
+            .Skip((page-1) * pageSize)
             .Take(pageSize)
             .ToList()
             .AsReadOnly();

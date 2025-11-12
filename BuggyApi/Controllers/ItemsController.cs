@@ -24,6 +24,10 @@ public class ItemsController : ControllerBase
     public async Task<ActionResult<Item>> GetById(int id, CancellationToken ct)
     {
         var item = await _repo.GetByIdAsync(id, ct);
+        if(item==null)
+        {
+            return NotFound();
+        }
         return Ok(item);
     }
 
